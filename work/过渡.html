@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过渡效果</title>
+    <style type="text/css">
+        span{display:inline-block;}
+        .fade-enter-active{
+            animation:bounce-in 2s;
+        }
+        .fade-leave-active{
+            animation:bounce-in 2s reverse;
+        }
+        @keyframes bounce-in {
+            0%{
+                transform: scale(0);
+            }
+            50%{
+                transform: scale(1.5);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+    </style>
+    <script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+<div id="dome">
+    <button @click="show = !show">Toggle</button>
+    <br/>
+    <transition name="fade">
+        <span v-show="show">hello过渡</span>
+    </transition>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el:'#dome',
+        data:{
+            show:true,
+        }
+    })
+</script>
+</body>
+</html>

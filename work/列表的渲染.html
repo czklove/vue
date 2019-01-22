@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+<div id="dome">
+    <h2>测试数组遍历循环</h2>
+    <ul>
+        //(obj,key) 对于数组就是单个对象加下标，对于单个对象的遍历，就是value,key
+        <li  v-for="(person,index) in filterpersons">
+            {{index+'--'+person.name+'--'+person.age}}--
+            <button @click="removep(person)">删除</button>
+            <button @click="upt(person,{id:8,name:'ljj2',age:27})">更新</button>
+        </li>
+    </ul>
+    <h2>测试遍历对象</h2>
+    <ul>
+        <li v-for="(value,key) in objs">
+            {{value+'--'+key}}
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el:'#dome',
+        data: {
+            persons: [
+                {id: 1, name: 'czklove', age: 17},
+                {id: 3, name: 'czklove2', age: 19},
+                {id: 3, name: 'ljj', age: 19},
+                {id: 2, name: 'czklove1', age: 18},
+            ],
+            objs: {
+                id: 111,
+                name: 'czk',
+                age: 19
+            }
+        },
+        methods:{
+            removep:function(p){
+                var index=this.persons.indexOf(p)
+                this.persons.splice(index,1)
+            },
+            upt:function(oldp,newp) {
+                var index = this.persons.indexOf(oldp)
+                //对于数组，只有使用变异的方法才能让vm检测到数据进行了更新
+                this.persons.splice(index, 1, newp);//删除某个元素，然后在这个位子进行新增
+            }
+        },
+        computed:{
+            filterpersons:function() {
+                return this.persons.filter(p=>true)
+            }
+        }
+    })
+</script>
+</body>
+</html>

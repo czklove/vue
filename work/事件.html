@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{msg}}</p>
+    <button v-on:click="reverse">倒序</button>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'I love you!'
+        },
+        methods:{
+            reverse: function (){ //事件回调函数
+                //this vue的实例
+                this.msg=this.msg.split('').reverse().join('')
+            }
+        }
+    })
+</script>
+</body>
+</html>

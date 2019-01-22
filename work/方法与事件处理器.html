@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>方法与实践过滤器</title>
+    <script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+<div id="dome">
+    <h2>1.绑定监听</h2>
+    <button v-on:click="test1">test1</button>
+    <button @click="test1">test2</button>
+    <button @click="test1($event,123)">test3</button>
+    <h3>2.事件修饰符</h3>
+    <!--
+        停止事件冒泡
+        阻止事件冒泡的行为
+    -->
+    <div style="width: 300px;height: 300px;background: red" @click="divwbclick">
+        <div style="width: 200px;height: 200px;background-color: aquamarine" @click.stop="divnbclick"></div>
+    </div>
+    <a href="http://www.baidu.com" @click.prevent="test5">去百度</a>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#dome",
+        data:{},
+        methods:{
+            test1: function (event,a) {
+                alert(a+'--'+event.clientX)
+            },
+            divwbclick:function(){
+                alert('点击了外部div')
+            },
+            divnbclick:function(){
+                alert('点击了内部div')
+                //停止事件的冒泡
+            },
+            test5:function(){
+                alert('点击了去百度')
+            }
+        }
+    })
+</script>
+</body>
+</html>

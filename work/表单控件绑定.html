@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+<div id="dome">
+    <input type="text" v-model="msg"/>
+    <textarea v-model="msg"></textarea>
+    {{msg}}
+    <br>
+    <input type="checkbox" v-model="ok"/>{{ok}}<br>
+
+    <input type="checkbox" name="students" value="Tom" v-model="selectStudents"/>Tom
+    <input type="checkbox" name="students" value="Json" v-model="selectStudents"/>Json
+    <input type="checkbox" name="students" value="Jack" v-model="selectStudents"/>Jack
+    <br>
+    {{selectStudents}}
+    <br>
+    <input type="radio" name="sex" value="male" v-model="sex"/>
+    <input type="radio" name="sex" value="female" v-model="sex"/>
+    {{sex}}<br>
+    <select name="city" id="" v-model="selectCityId">
+        <option :value="city.id" v-for="city in citys">{{city.name}}</option>
+    </select>
+    {{selectCityId}}<br>
+    <input type="text" v-model.lazy="msg2"/>{{msg2}}
+</div>
+<script>
+    new Vue({
+        el:'#dome',
+        data: {
+            msg: 'asdf',
+            ok: true,
+            selectStudents: ['', 'Json', ''],
+            sex: 'female',
+            citys: [
+                {id: 1, name: '北京'},
+                {id: 2, name: '上海'},
+                {id: 3, name: '杭州'},
+            ],
+            selectCityId:2,
+            msg2:'失去焦点才同步'
+        },
+        methods:{
+
+        }
+    })
+</script>
+</body>
+</html>

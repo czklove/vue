@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(todo,index) in todos">{{index}}{{todo.id+'+++++'+todo.name}}</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el:"#app",
+        data:function(){
+            return {
+                todos:[
+                    {id:2,name:'eat'},
+                    {id:3,name:'sleep'},
+                    {id:4,name:'dadoudou'}
+                ]
+            }
+        }
+    })
+</script>
+</body>
+</html>

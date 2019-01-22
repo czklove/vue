@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="app">
+    姓:<input type="text" placeholder="First Name" v-model="firstname"/>
+    名:<input type="text" placeholder="Last Name" v-model="lastname"/>
+    姓名1(单向):<input type="text" placeholder="Full name" v-model="fullname1"/>
+    姓名2(单向):<input type="text" placeholder="Full name2" v-model="fullname2"/>
+    姓名3(双向):<input type="text" placeholder="fullname3" v-model="fullname3"/>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data:{
+            firstname:'cz',
+            lastname:'klove',
+            fullname2:'cz-klove'
+        },
+        computed:{
+            fullname1:function (){
+            return this.firstname+'--'+this.lastname
+            },
+            fullname3:{
+                get:function(){//获取单签属性的值，当读取当前属性是UI掉
+                    return this.firstname+'-'+this.lastname
+                },
+                set:function(value){//监听单签属性是否发生改变，当属性发生变化时回调
+                    var names=value.split('-')
+                    ;this.firstname=names[0]
+                    this.lastname=names[1]
+                }
+            },
+        },
+        methods:{
+
+        },
+        watch: {
+            firstname: function (value) {
+                //更新full那么2
+                this.fullname2 = value + '-' + this.lastname
+            },
+            lastname: function (value) {
+                this.fullname2 = this.firstname + '-' + value
+            }
+        }
+    })
+</script>
+</body>
+</html>
