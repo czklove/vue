@@ -1,0 +1,60 @@
+<template>
+  <div class="todo-header">
+    <input type="text" placeholder="请输入你的任务名称,按回车键确认"
+    v-model="inputtodo" @keyup.enter="addtodo"/>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    // add方法从父窗口中传过来
+    add: {
+      type: Function, // 属性值的类型
+      required: true // 属性是否是必须的
+    }
+  },
+  data () {
+    return {
+      inputtodo: ''
+    }
+  },
+  methods: {
+    addtodo () {
+      var inputtodo = this.inputtodo.trim()
+      if (!inputtodo) {
+        this.inputtodo = ''
+        return
+      }
+      // 读取输入，创建一个todo
+      var todo = {
+        name: this.inputtodo,
+        comliete: false
+      }
+      // 将todo添加到todos
+      this.add(todo)
+      // 清除input输入
+      this.inputtodo = ''
+    }
+  }
+}
+
+</script>
+
+<style>
+/*header*/
+.todo-header input {
+  width: 560px;
+  height: 28px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 7px;
+}
+
+.todo-header input:focus {
+  outline: none;
+  border-color: rgba(82, 168, 236, 0.8);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+</style>

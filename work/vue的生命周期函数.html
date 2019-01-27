@@ -2,9 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>vue的生命周期函数</title>
+    <script type="text/javascript" src="js/vue.js"></script>
 </head>
 <body>
-
+<div id="dome">
+    <p v-text="msg" v-show="Isshow"></p>
+    <button @click="kill">干掉</button>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el:'#dome',
+        data:{
+            msg:'生命周期函数',
+            Isshow:true,
+        },
+        beforeCreate:function(){
+            console.log('beforeCreate()')
+        },
+        created:function(){
+            this.Interval=setInterval(()=>{
+                this.Isshow=!this.Isshow;//用箭头函数，this就指向外部函数
+            },1000)
+        },
+        beforeMount:function(){
+            console.log('beforeMount()')
+        },
+        mounted:function(){
+            console.log('Mounted()')
+        },
+        beforeUpdate:function(){
+            console.log('beforeUpdate()')
+        },
+        updated:function(){
+            console.log('updated()')
+        },
+        //死完之前做一些清理工作
+        beforeDestroy:function(){
+            console.log('beforeDestroy()')
+            setTimeout(this.interval);
+        },
+        destroyed:function(){
+            console.log('destroyed()')
+        },
+        methods: {
+            kill:function(){
+                this.$destroy();
+            }
+        }
+    })
+</script>
 </body>
 </html>
